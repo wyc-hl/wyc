@@ -1,0 +1,240 @@
+知识点：
+一、 a 标签的 href属性
+
+href 属性的值可以是"#"
+基本语法：
+<a href="#">链接文字</a>
+其中“ # ”表示空链接。
+空链接：指指向链接后，鼠标变成手形，但单击后仍停留在当前页面。
+临时加的空链接，主要为了能更好的看到最终的效果。
+
+
+<a href="javascript:void(0)">链接文字</a>
+javascript:void(0) 含义
+javascript:void(0) 中最关键的是 void 关键字， 
+void 是 JavaScript 中非常重要的关键字，
+该操作符指定要计算一个表达式但是不返回值。
+当用户链接时，void(0) 计算为 0，
+但 Javascript 上没有任何效果。
+注意：void()仅仅是代表不返回任何值，但是括号内的表达式还是要运行
+
+
+
+<a href="javascript:;">链接文字</a>
+租用等同于<a href="javascript:void(0)">链接文字</a>
+
+二、js内置对象 日期
+Date 对象是 JavaScript 语言的一个内置数据类型。
+Date 对象用 new Date() 创建，如下所示。
+语法
+Date() 构造函数有几种不同的形式：
+    new Date() 
+    new Date(milliseconds)  
+    new Date(datestring)   
+    new Date(year,month,date[,hour,minute,second,millisecond])
+注意： 方括号内的参数是可选的。
+
+下面是参数描述：
+No Argument： 不带参数，Date() 构造函数创建一个日期对象，设置为当前日期和时间。
+milliseconds： 当传递一个数字作为参数，它作为表示日期中毫秒的内部数字，作为 getTime() 方法的返回值中的毫秒。例如，通过传递参数 5000 创建一个日期对象，代表 1/1/1970 午夜过去 5 秒钟。
+datestring： 当传递一个字符串作为参数，它必须是一个日期形式的字符串，即可以被 Date.parse() 方法接收的格式。
+7 agrument： 对于上面给出的最后一种形式的构造函数，下面是每个参数的描述：
+
+year： 整数，表示年。为了兼容性(为了避免Y2K问题)，应该完整地指定年；使用 1998而不是 98。
+month：整数，表示月。从 0（表示一月）开始到 11（表示十二月）。
+date： 整数，表示一个月的某一天。
+hour： 整数，表示一天的某一个小时（24小时制）。
+minute： 整数，表示时间计数的分钟片段。
+second： 整数，表示时间计数的秒片段。
+milliseconds： 整数，表示时间计数的毫秒片段。
+
+Date方法
+下边列出了日期的一系列方法及对应的描述。
+
+方法					描述
+Date()		返回当日的日期和时间
+getDate()	根据本地时从Date对象返回一个月中的某一天（1 ~ 31）
+getDay()	根据本地时从Date对象返回一周中的某一天（1 ~ 6）
+getFullYear()	根据本地时从 Date 对象以四位数字返回年份
+getHours()	根据本地时返回 Date 对象的小时 (0 ~ 23)
+getMilliseconds()	根据本地时返回 Date 对象的毫秒(0 ~ 999)
+getMinutes()	根据本地时返回 Date 对象的分钟 (0 ~ 59)
+getMonth()	根据本地时从Date对象返回月份（1 ~ 11）
+getSeconds()	根据本地时返回 Date 对象的秒数 (0 ~ 59)
+getTime()	根据本地时返回 1970 年 1 月 1 日至今的毫秒数
+getTimezoneOffset()	返回本地时间与格林威治标准时间 (GMT) 的分钟差
+getUTCDate()	根据世界时从 Date 对象返回月中的一天 (1 ~ 31)
+getUTCDay()	根据世界时从 Date 对象返回周中的一天 (0 ~ 6)
+getUTCFullYear()	根据世界时从 Date 对象返回四位数的年份
+getUTCHours()	根据世界时返回 Date 对象的小时 (0 ~ 23)
+getUTCMilliseconds()	根据世界时返回 Date 对象的毫秒(0 ~ 999)
+getUTCMinutes()	根据世界时返回 Date 对象的分钟 (0 ~ 59)
+getUTCMonth()	根据世界时从 Date 对象返回月份 (0 ~ 11)
+getUTCSeconds()	根据世界时返回 Date 对象的秒钟 (0 ~ 59)
+getYear()	弃用,返回在指定的日期根据当地时间。使用getFullYear()代替。
+setDate()	根据本地时设置 Date 对象中月的某一天 (1 ~ 31)
+setFullYear()	根据本地时设置 Date 对象中的年份（四位数字）
+setHours()	根据本地时设置 Date 对象中的小时 (0 ~ 23)
+setMilliseconds()	根据本地时设置 Date 对象中的毫秒 (0 ~ 999)
+setMinutes()	根据本地时设置 Date 对象中的分钟 (0 ~ 59)
+setMonth()	根据本地时设置 Date 对象中月份 (0 ~ 11)
+setSeconds()	根据本地时设置 Date 对象中的秒钟 (0 ~ 59)
+setTime()	根据本地时以毫秒设置 Date 对象
+setUTCDate()	根据世界时设置 Date 对象中月份的一天 (1 ~ 31)
+setUTCFullYear()	根据世界时设置 Date 对象中的年份（四位数字）
+setUTCHours()	根据世界时设置 Date 对象中的小时 (0 ~ 23)
+setUTCMilliseconds()	根据世界时设置 Date 对象中的毫秒 (0 ~ 999)
+setUTCMinutes()	根据世界时设置 Date 对象中的分钟 (0 ~ 59)
+setUTCMonth()	根据世界时设置 Date 对象中的月份 (0 ~ 11)
+setUTCSeconds()	根据世界时设置 Date 对象中的秒钟 (0 ~ 59)
+setYear()	弃用,设置为指定的日期根据当地时间。使用 setFullYear() 代替。
+toDateString()	把 Date 对象的日期部分转换为字符串
+toGMTString()	弃用,将日期转换为一个字符串,使用互联网格林尼治时间约定。使用 toUTCString() 代替。
+toLocalDateString()	根据本地时间格式，把 Date 对象的日期部分转换为字符串
+toLocalFormat()	将日期转换为一个字符串,使用格式化字符串。
+toLocalString()	根据本地时间格式，把 Date 对象转换为字符串
+toLocalTimeString()	根据本地时间格式，把 Date 对象的时间部分转换为字符串
+toSource()	返回一个字符串代表一个等价的日期对象的源码,您可以使用这个值来创建一个新的对象
+toString()	把 Date 对象转换为字符串
+toTimeString()	把 Date 对象的时间部分转换为字符串
+toUCTString()	根据世界时，把 Date 对象转换为字符串
+valueOf()	返回 Date 对象的原始值
+Date 静态方法
+方法				描述
+Date.parse()	返回 1970 年 1 月 1 日午夜到指定日期（字符串）的毫秒数
+Date.UTC()	根据世界时返回 1970 年 1 月 1 日 到指定日期的毫秒数
+
+运动有关：
+让谁运动，谁就需要定位
+运动和定位有关。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

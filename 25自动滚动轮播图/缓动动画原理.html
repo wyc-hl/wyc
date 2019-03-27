@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>缓动动画原理</title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 100px;
+				height: 100px;
+				background: pink;
+				position: absolute;
+				top: 100px;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<button id="btn400">点我运动400</button>
+		<button id="btn600">点我运动600</button>
+		<div class="box">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var btn400=document.getElementById("btn400");
+		var btn600=document.getElementById("btn600");
+		var box=document.getElementsByClassName("box")[0];
+		
+		var leader=0;
+		var target1=400;
+		var target2=600;
+		var timer=null;
+		btn400.onclick=function(){
+//			clearInterval(timer);
+//			timer=setInterval(function(){
+//				leader=leader+(target1-leader)/10;
+//				box.style.left=leader+"px";
+//			},30);
+			animate(box,500);
+		}
+		btn600.onclick=function(){
+//			clearInterval(timer);
+//			timer=setInterval(function(){
+//				leader=leader+(target2-leader)/10;
+//				box.style.left=leader+"px";
+//			},30);
+			animate(box,700);
+		}
+		
+		//封装动画
+		//obj  要运动的对象
+		//target  运动的距离
+//		function animate(obj,target){
+//			clearInterval(obj.timer);
+//			obj.timer=setInterval(function(){
+//				var step=(target-obj.offsetLeft)/10;
+//				step=step<0?Math.ceil(step):Math.floor(step);
+//				obj.style.left=obj.offsetLeft+step+"px";
+//				if(obj.offsetLeft==target){
+//					obj.style.left=target+"px";
+//				}
+//				
+//			},10);
+//		}
+
+	function animate(obj,target){
+        clearInterval(obj.timer);  // 先清除定时器
+        var speed = obj.offsetLeft < target ? 15 : -15;  // 用来判断 应该 +  还是 -
+        obj.timer = setInterval(function() {
+            var result = target - obj.offsetLeft; // 因为他们的差值不会超过5
+            obj.style.left = obj.offsetLeft + speed + "px";
+            if(Math.abs(result)<=15)  // 如果差值不小于 5 说明到位置了
+            {
+                clearInterval(obj.timer);
+                obj.style.left = target + "px";  // 有5像素差距   我们直接跳转目标位置
+            }
+        },10)
+    }
+		
+		//向上取整
+		console.log(Math.ceil(1.01));
+		console.log(Math.ceil(1.51));
+		console.log(Math.ceil(-1.01));
+		console.log(Math.ceil(-1.51));
+		//向下取整
+		console.log(Math.floor(1.01));
+		console.log(Math.floor(1.51));
+		console.log(Math.floor(-1.01));
+		console.log(Math.floor(-1.51));
+		//四舍五入
+		console.log("************");
+		console.log(Math.round(1.01));
+		console.log(Math.round(1.51));
+		console.log(Math.round(-1.01));
+		console.log(Math.round(-1.51));
+	</script>
+</html>

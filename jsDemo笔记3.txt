@@ -1,0 +1,134 @@
+知识点：
+一、scroll家族
+scrollTop    scrollLeft  
+
+1.scrollTop     被卷去的头部  
+ 它就是当你滑动滚轮浏览网页的时候网页隐藏在屏幕上方的距离
+
+
+2.获取scrollTop 的值：
+事件 ：  页面滚动效果  
+window.onscroll = function() { 页面滚动语句  }
+谷歌浏览器 和没有声明 DTD  <DOCTYPE	> ：  
+  document.body.scrollTop;  
+火狐 和其他浏览器   
+  document.documentElement.scrollTop;
+ ie9+  和 最新浏览器   都认识
+  window.pageXOffset;     pageYOffset  （scrollTop）
+ 兼容性写法：  
+
+var scrollTop = window.pageYOffset || document.documentElement.scrollTop
+         || document.body.scrollTop || 0;
+
+3.判断是不是怪异模式的浏览器
+document.compatMode == "CSS1Compat"
+document.compatMode === "BackCompat"
+BackCompat  未声明
+CSS1Compat  已经声明
+注意大小写 
+
+
+
+
+4.window.scrollTo(15,15); 
+方法可把内容滚动到指定的坐标。
+格式：
+scrollTo(xpos,ypos)
+xpos	必需。要在窗口文档显示区左上角显示的文档的 x 坐标。
+ypos必需。要在窗口文档显示区左上角显示的文档的 y 坐标
+因为我们的网页大部分都没有水平滚动条，所以，这个x 不太常用。
+
+
+
+二、事件冒泡
+事件冒泡含义: 当一个元素上的事件被触发的时候，
+比如说鼠标点击了一个按钮，同样的事件将会在那个元素的所有祖先元素中被触发。
+这一过程被称为事件冒泡；这个事件从原始元素开始一直冒泡到DOM树的最上层。
+
+1.冒泡顺序：
+IE 6.0: 
+div -> body -> html -> document
+其他浏览器: 
+div -> body -> html -> document -> window
+
+不是所有的事件都能冒泡。以下事件不冒泡：blur、focus、load、unload
+
+2.阻止冒泡的方法
+ 标准浏览器 和  ie浏览器  
+ w3c的方法是event.stopPropagation()        proPagation  传播  传递 
+ IE则是使用event.cancelBubble = true       bubble   冒泡  泡泡       cancel 取消 
+
+兼容写法：
+   if(event && event.stopPropagation)
+          {
+              event.stopPropagation();  //  w3c 标准
+          }
+          else
+          {
+              event.cancelBubble = true;  // ie 678  ie浏览器
+   }
+
+23小案例 点击空白处隐藏盒子
+  这个案例就是说，一个盒子，点击除了自己之外的任何一个地方，就会隐藏。
+ 原理：   
+      点击自己不算 ( 怎么证明我是我 点击的这个对象id 正好和自己一样  )
+      点击空白处 就是点击  document  
+
+判断当前对象
+   火狐 谷歌 等   event.target.id   
+   ie 678          event.srcElement.id    
+   兼容性写法：  
+  var targetId = event.target ? event.target.id : event.srcElement.id;
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

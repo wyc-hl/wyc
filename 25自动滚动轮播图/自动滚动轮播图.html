@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul,ol{
+				list-style: none;
+			}
+			img{
+				vertical-align: top;
+			}
+			.box{
+				width: 500px;
+				height: 200px;
+				padding: 5px;
+				border: 1px solid gray;
+				margin: 100px auto;
+			}
+			.box .inner{
+				width: 500px;
+				height: 200px;
+				position: relative;
+				overflow: hidden;
+			}
+			.box .inner ul{
+				width: 600%;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.box .inner ul li{
+				float: left;
+			}
+			
+			.box .inner ol{
+				position: absolute;
+				bottom: 5px;
+				right: 10px;
+			}
+			.box .inner ol li{
+				float: left;
+				width: 20px;
+				height: 20px;
+				background: white;
+				text-align: center;
+				line-height: 20px;
+				margin-left: 6px;
+				cursor: pointer;
+				border: 1px solid gray;
+			}
+			.box .inner ol li.current{
+				background: yellow;
+				/*指示器变大*/
+				margin-top: -4px;
+				padding: 2px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="inner">
+				<ul>
+					<li><img src="images/taobao/1.jpg" width="500" height="200"></li>
+					<li><img src="images/taobao/2.jpg" width="500" height="200"></li>
+					<li><img src="images/taobao/3.jpg" width="500" height="200"></li>
+					<li><img src="images/taobao/4.jpg" width="500" height="200"></li>
+					<li><img src="images/taobao/5.jpg" width="500" height="200"></li>
+				</ul>
+				<!--<ol>
+					<li class="current">1</li>
+					<li>2</li>
+					<li>3</li>
+					<li>4</li>
+					<li>5</li>
+				</ol>-->
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function animate(obj,target){
+	        clearInterval(obj.timer);  // 先清除定时器
+	        var speed = obj.offsetLeft < target ? 15 : -15;  // 用来判断 应该 +  还是 -
+	        obj.timer = setInterval(function() {
+	            var result = target - obj.offsetLeft; // 因为他们的差值不会超过5
+	            obj.style.left = obj.offsetLeft + speed + "px";
+	            if(Math.abs(result)<=15)  // 如果差值不小于 5 说明到位置了
+	            {
+	                clearInterval(obj.timer);
+	                obj.style.left = target + "px";  // 有5像素差距   我们直接跳转目标位置
+	            }
+	        },10)
+    }
+		var box=document.getElementsByClassName("box")[0];
+		var inner=box.children[0];
+		var ul=inner.children[0];
+		var ulLis=ul.children;
+		//无缝滚动
+		ul.appendChild(ulLis[0].cloneNode(true));
+		//复习元素的创建和追加
+		var ol=document.createElement("ol");
+		for(var i=0;i<ulLis.length-1;i++){
+			var li=document.createElement("li");
+			li.innerHTML=i+1;
+			ol.appendChild(li);
+		}
+		inner.appendChild(ol);
+		ol.children[0].className="current";
+		
+		var olLis=ol.children;
+		//开始动画
+		var target=0;
+		var timer=null;
+		var key=0;//记录运动到第几张图片
+		var square=0;//知识器
+		function autoPlay(){
+			key++;//先加加
+			if(key>ulLis.length-1){//当滚动到第六张 也就是第一张时，迅速调回
+				//难点
+				ul.style.left="0px";//迅速调回
+				key=1;
+			}
+			animate(ul,-key*500);
+			//指示器跟着动
+			for(var i=0;i<olLis.length;i++){
+				olLis[i].className="";
+			}
+			square++;
+			if(square>olLis.length-1){
+				//当运动到最后一张是，从头开始
+				square=0;
+			}
+			olLis[square].className="current";
+		}
+		timer=setInterval(autoPlay,1000);
+		
+		for(var i=0;i<olLis.length;i++){
+			olLis[i].index=i;
+			olLis[i].onmouseover=function(){
+				for(var i=0;i<olLis.length;i++){
+					olLis[i].className="";
+				}
+				
+				olLis[this.index].className="current";
+				animate(ul,-this.index*500);
+				//难点
+				square=key=this.index;
+			}
+		}
+		
+		
+		box.onmouseover=function(){
+			clearInterval(timer);
+		}
+		box.onmouseout=function(){
+			timer=setInterval(autoPlay,1000);
+		}
+	</script>
+</html>

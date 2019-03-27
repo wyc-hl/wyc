@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				width: 200px;
+				height: 200px;
+				border: 1px solid red;
+				padding: 20px;
+				margin: 10px;
+				background: purple;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box"  style="width: 100px; height: 100px;border: 2px solid red;padding: 20px;margin: 10px;">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		var box=document.getElementsByClassName("box")[0];
+		//offsetWidth offsetHeight
+		//offsetWidth=width+左右border+左右padding
+		//offsetHeight=height+上下border+上下padding
+		//css样式在哪里都能读的到
+		//读取到的值不带单位
+		//只读属性
+		console.log("box.offsetWidth="+box.offsetWidth);
+		console.log("box.offsetHeight="+box.offsetHeight);
+		//obj.style.width obj.style.heiht
+		//只能读取行内样式
+		//读取到的值带单位（px)
+		//可读可写
+		console.log("box.style.width="+box.style.width);
+		console.log("box.style.height="+box.style.height);
+		
+		
+		box.style.width="300px";
+		box.style.height="300px";
+		console.log("************************");
+		console.log("box.style.width="+box.style.width);
+		console.log("box.style.height="+box.style.height);
+		console.log("box.offsetWidth="+box.offsetWidth);
+		console.log("box.offsetHeight="+box.offsetHeight);
+		box.offsetWidth="500px";
+		box.offsetHeight="500px";
+		console.log("************************");
+		console.log("box.style.width="+box.style.width);
+		console.log("box.style.height="+box.style.height);
+		console.log("box.offsetWidth="+box.offsetWidth);
+		console.log("box.offsetHeight="+box.offsetHeight);
+	</script>
+</html>
